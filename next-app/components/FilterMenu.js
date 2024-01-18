@@ -62,7 +62,7 @@ function FilterMenu() {
                             <Image objectFit="contain" layout="fill" src={menu.icon} />
                         </div>
 
-                        <p className="text-xs font-light">{menu.title}</p>
+                        <p className="text-xs font-medium">{menu.title}</p>
                     </div>
                 ))}
             </div>

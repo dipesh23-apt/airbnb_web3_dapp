@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { useAirbnb } from '../../hooks/useAirbnb'
-import { Uploader } from 'uploader'
 import Web3 from 'web3'
+import { UploadButton } from "@bytescale/upload-widget-react";
+import * as Bytescale from "@bytescale/sdk";
 
 const NewListingForm = setShowNewListingModal => {
   const [name, setName] = useState('')
@@ -12,23 +13,62 @@ const NewListingForm = setShowNewListingModal => {
 
   const { addListing } = useAirbnb()
 
-  const uploader = new Uploader({
-    apiKey: 'free',
-  })
+  // const uploader = new Uploader({
+  //   apiKey: 'free',
+  // })
+  const options = {
+    apiKey: "free", // Get API key: https://www.bytescale.com/get-started
+    maxFileCount: 1
+  };
 
-  const handleUploadPropertyImage = async () => {
-    uploader
-      .open({ multi: false })
-      .then(files => {
+  const uploadManager = new Bytescale.UploadManager({
+    apiKey: "free" ,// Get API key: https://www.bytescale.com/get-started
+    maxFileCount: 1
+  });
+  const handleUploadPropertyImage2 = async() => {
+      uploadManager.upload(options).then(
+    // uploadManager.upload(options).then(
+      files => {
         if (files.length === 0) {
-          alert('No files selected.')
+          alert("No image selected.");
         } else {
-          setImgURL(files[0].fileUrl)
+          // Update state with the file URL
+          setImgURL(files[0].fileUrl);
         }
-      })
-      .catch(err => {
-        console.error(err)
-      })
+      },
+      error => alert(error)
+    );
+  };
+
+
+  function handleUploadPropertyImage(){
+  //const handleUploadPropertyImage = async () => {
+    // uploader
+    //   .open({ multi: false })
+    //   .then(files => {
+    //     if (files.length === 0) {
+    //       alert('No files selected.')
+    //     } else {
+    //       setImgURL(files[0].fileUrl)
+    //     }
+    //   })
+    //   .catch(err => {
+    //     console.error(err)
+    //   })
+        setImgURL(files[0].fileUrl)
+        // Bytescale.UploadWidget.upload(options).then(
+        //   files => alert(files.length === 0 
+        //                 ? "No image selected." 
+        //                 : setImgURL(files[0].fileUrl)),
+        //   error => alert(error)
+        // );
+      }
+
+  const onCreate = event =>{
+    event.preventDefault()
+    console.log(name,propertyAddress,imgURL)
+    const priceInWei=Web3.utils.toWei(pricePerDay, 'ether')
+    addListing(name,propertyAddress,description,imgURL,priceInWei)
   }
 
   const styles = {
@@ -40,8 +80,10 @@ const NewListingForm = setShowNewListingModal => {
   }
 
   return (
+  
     <div className={styles.wrapper}>
       <div className={styles.formWrapper}>
+      <script src="https://js.bytescale.com/upload-widget/v4"></script>
         <label className={styles.formInputContainer}>
           <span className={styles.inputLabel}>Name</span>
           <input
@@ -69,9 +111,26 @@ const NewListingForm = setShowNewListingModal => {
           />
         </label>
 
-        <div>
+        {/* <div>
           <button onClick={handleUploadPropertyImage}>Upload new Image</button>
-        </div>
+         </div> */}
+
+         <div>
+         <UploadButton options={options}
+                onComplete={
+                  files=> {
+                    setImgURL(files[0].fileUrl);
+                    console.log(imgURL);
+                    alert(files.map(x => x.fileUrl).join("\n"));
+                  }
+                }>
+                {({onClick}) =>
+                <button onClick={onClick}>
+                  Upload new Image
+                </button>
+                }
+         </UploadButton>
+         </div>
 
         <label className={styles.formInputContainer}>
           <span className={styles.inputLabel}>Price per Day</span>

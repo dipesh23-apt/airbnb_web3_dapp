@@ -1,10 +1,13 @@
 import Image from 'next/image'
+import '@rainbow-me/rainbowkit/styles.css';
+
 import {
   GlobeAmericasIcon,
   Bars3Icon,
   UserCircleIcon,
   MagnifyingGlassIcon,
 } from '@heroicons/react/24/solid'
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 const Header = ({
   publicKey,
@@ -65,6 +68,7 @@ const Header = ({
         <div className='border border-transparent cursor-pointer hover:bg-gray-100 rounded-full p-3'>
           <GlobeAmericasIcon className='h-5 w-5 transition-all duration-300 text-gray-800' />
         </div>
+        <ConnectButton/>
       </div>
     </header>
   )

@@ -4,11 +4,12 @@ import Web3 from 'web3'
 import { StarIcon } from '@heroicons/react/20/solid'
 import { HeartIcon } from '@heroicons/react/24/outline'
 import { useAppContext } from '../../context/context'
-
+import { useAirbnb } from '../../hooks/useAirbnb'
 const ListingItem = ({ item, setShowReserveListingModal }) => {
   const [priceInEth] = useState(Web3.utils.fromWei(item.pricePerDay))
 
   const { setSelectedPropertyId } = useAppContext()
+  const { address }= useAirbnb()
 
   return (
     <div
