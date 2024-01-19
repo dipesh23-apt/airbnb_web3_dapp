@@ -5,10 +5,6 @@
 This project is a web3 decentralized application **(dApp)** that leverages smart contracts on the Ethereum blockchain. The dApp is built using technologies such as Next.js for the frontend and Solidity for smart contracts.
 
 ## Tech Stack and Tools:
-<p align="left">
-     <a href="https://golang.org" target="_blank"> <img src="https://static-00.iconduck.com/assets.00/nextjs-icon-2048x1234-pqycciiu.png" width ='80px'/> </a> 
-    
-</p>
 
 | Logo                | Name |
 | --------------------| --- |
@@ -18,6 +14,9 @@ This project is a web3 decentralized application **(dApp)** that leverages smart
 |<a href="https://golang.org" target="_blank"> <img src="https://freelogopng.com/images/all_img/1683020772metamask-logo-png.png" width ='120px'/> </a>  | Metamask   https://metamask.io/ |
 |<a href="https://golang.org" target="_blank"> <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStOm1_HXARjIVdWXEAwI4snVUmhu6cSycsVbjRFagLn6_qjoHj95WEBCpyX61XUP5N7rc&usqp=CAU" width ='100px'/> </a>  | Infura   https://app.infura.io/ |
 
+## Views
+
+## Demo
 
 ## Project Structure
 
